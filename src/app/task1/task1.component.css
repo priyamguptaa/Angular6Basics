@@ -1,0 +1,9 @@
+.red-border{
+    border: 1px solid red;
+
+}
+@media only screen and (max-width: 768px){
+    .flex{ display: flex; flex-direction: column; }
+    #nametf { order: 2; }
+    #emailtf { order: 1; }
+}

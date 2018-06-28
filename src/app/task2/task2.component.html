@@ -1,0 +1,119 @@
+<div class="container">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="form-group" formArrayName="task" formGroupName="task">
+      <div *ngFor="let x of userForm.controls.task.controls;let i=index;">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Task#{{i+1}}
+            <button class="btn btn-danger" *ngIf="userForm.controls.task.controls.length>1" (click)="removeTask(i)">Delete</button>
+          </div>
+          <div class="panel-body" [formGroupName]="i">
+            <div class="form-group">
+              <label>Text</label>
+              <input type="text" class="form-control" formControlName="text" [ngClass]="{'red-border': userForm.controls['task'].controls[i].controls['text'].errors && userForm.controls['task'].controls[i].controls['text'].dirty && userForm.controls['task'].controls[i].controls['text'].touched}">
+              <div *ngIf="userForm.controls['task'].controls[i].controls['text'].errors && (userForm.controls['task'].controls[i].controls['text'].dirty && userForm.controls['task'].controls[i].controls['text'].touched)">
+                <div *ngIf="userForm.controls['task'].controls[i].controls['text'].hasError('required')" class="alert alert-danger">
+                  Please enter a name
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Dropdown</label>
+              <select class="form-control" formControlName="dropdown" [ngClass]="{'red-border': userForm.controls['task'].controls[i].controls['dropdown'].errors && userForm.controls['task'].controls[i].controls['dropdown'].dirty && userForm.controls['task'].controls[i].controls['dropdown'].touched}">
+                <option value="date">Date</option>
+                <option value="number">Number</option>
+                <option value="email">Email</option>
+                <option value="phone">Phone</option>
+              </select>
+              <div *ngIf="userForm.controls['task'].controls[i].controls['dropdown'].errors && (userForm.controls['task'].controls[i].controls['dropdown'].dirty && userForm.controls['task'].controls[i].controls['dropdown'].touched)">
+                <div *ngIf="userForm.controls['task'].controls[i].controls['dropdown'].hasError('required')" class="alert alert-danger">
+                  Please choose an option
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Value</label>
+              <input formControlName="value" type="text" class="form-control" [ngClass]="{'red-border': userForm.controls['task'].controls[i].controls['value'].errors && userForm.controls['task'].controls[i].controls['value'].dirty && userForm.controls['task'].controls[i].controls['value'].touched}">
+              <div *ngIf="userForm.controls['task'].controls[i].controls['value'].errors && (userForm.controls['task'].controls[i].controls['value'].dirty && userForm.controls['task'].controls[i].controls['value'].touched)">
+                <div *ngIf="userForm.controls['task'].controls[i].controls['value'].hasError('required')" class="alert alert-danger">
+                  Please enter a value
+                </div>
+                <div *ngIf="userForm.controls['task'].controls[i].controls['value'].hasError('pattern')" class="alert alert-danger">
+                  Please enter a correct pattern
+                </div>
+              </div>
+            </div>
+            <p>Mandatory</p>
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-right">
+      <a (click)="addTask()" class="btn btn-primary">Add</a>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+
+<!-- <div class="container">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="form-group" formArrayName="task" formGroupName="task">
+      <div *ngFor="let x of userForm.controls.task.controls;let i=index;">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Task#{{i+1}}
+            <button class="btn btn-danger" *ngIf="userForm.controls.task.controls.length>1" (click)="removeTask(i)">Delete</button>
+          </div>
+          <div class="panel-body" [formGroupName]="i">
+            <div class="form-group">
+              <label>Text</label>
+              <input type="text" class="form-control" formControlName="text" [ngClass]="{'red-border': userForm.controls['task'].controls[i].controls['text'].errors && userForm.controls['task'].controls[i].controls['text'].dirty && userForm.controls['task'].controls[i].controls['text'].touched}">
+              <div *ngIf="userForm.controls['task'].controls[i].controls['text'].errors && (userForm.controls['task'].controls[i].controls['text'].dirty && userForm.controls['task'].controls[i].controls['text'].touched)">
+                <div *ngIf="userForm.controls['task'].controls[i].controls['text'].hasError('required')" class="alert alert-danger">
+                  Please enter a name
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Dropdown</label>
+              <select class="form-control" formControlName="dropdown" [ngClass]="{'red-border': userForm.controls['task'].controls[i].controls['dropdown'].errors && userForm.controls['task'].controls[i].controls['dropdown'].dirty && userForm.controls['task'].controls[i].controls['dropdown'].touched}">
+                <option value="date">Date</option>
+                <option value="number">Number</option>
+                <option value="email">Email</option>
+                <option value="phone">Phone</option>
+              </select>
+              <div *ngIf="userForm.controls['task'].controls[i].controls['dropdown'].errors && (userForm.controls['task'].controls[i].controls['dropdown'].dirty && userForm.controls['task'].controls[i].controls['dropdown'].touched)">
+                <div *ngIf="userForm.controls['task'].controls[i].controls['dropdown'].hasError('required')" class="alert alert-danger">
+                  Please choose an option
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Value</label>
+              <input formControlName="value" type="text" class="form-control" [ngClass]="{'red-border': userForm.controls['task'].controls[i].controls['value'].errors && userForm.controls['task'].controls[i].controls['value'].dirty && userForm.controls['task'].controls[i].controls['value'].touched}">
+              <div *ngIf="userForm.controls['task'].controls[i].controls['value'].errors && (userForm.controls['task'].controls[i].controls['value'].dirty && userForm.controls['task'].controls[i].controls['value'].touched)">
+                <div *ngIf="userForm.controls['task'].controls[i].controls['value'].hasError('required')" class="alert alert-danger">
+                  Please enter a value
+                </div>
+              </div>
+            </div>
+            <p>Mandatory</p>
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-right">
+      <a (click)="addTask()" class="btn btn-primary">Add</a>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div> -->

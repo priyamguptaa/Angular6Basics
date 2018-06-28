@@ -1,0 +1,57 @@
+<div class="container">
+  <h2> Sign Up Form</h2>
+  <form [formGroup]="userForm" novalidate (ngSubmit)="onSubmit()">
+    <div class="flex">
+      <div class="form-group" id="nametf">
+        <label>Name: </label>
+        <input type="text" class="form-control" formControlName="name" [ngClass]="{'red-border': userForm.controls['name'].errors && (userForm.controls['name'].dirty && userForm.controls['name'].touched)}">
+        <!--<p> {{refName.className}}</p>-->
+        <div *ngIf="userForm.controls['name'].errors && (userForm.controls['name'].dirty && userForm.controls['name'].touched)" class="alert alert-danger">
+          <div *ngIf="userForm.controls['name'].hasError('required')">
+            Please enter a name
+          </div>
+        </div>
+      </div>
+      <div class="form-group" id="emailtf">
+        <label>Email: </label>
+        <input type="text" class="form-control" formControlName="email" [ngClass]="{'red-border': userForm.controls['email'].errors && (userForm.controls['email'].dirty && userForm.controls['email'].touched)}">
+        <div *ngIf="userForm.controls['email'].errors && (userForm.controls['email'].dirty && userForm.controls['email'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="userForm.controls['email'].hasError('required') ">
+            Please enter an email
+          </div>
+          <div *ngIf="userForm.controls['email'].hasError('pattern')">
+            Please enter a valid email
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Password: </label>
+      <input type="password" class="form-control" formControlName="pwd" [ngClass]="{'red-border': userForm.controls['pwd'].errors && (userForm.controls['pwd'].dirty && userForm.controls['pwd'].touched)}">
+      <div *ngIf="userForm.controls['pwd'].errors && (userForm.controls['pwd'].dirty && userForm.controls['pwd'].touched)" class="alert alert-danger">
+        <div *ngIf="userForm.controls['pwd'].hasError('required') ">
+          Please enter a password
+        </div>
+        <div *ngIf="userForm.controls['pwd'].hasError('minlength')">
+          Enter atleast 6 chars
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Phone No.</label>
+      <input type="number" class="form-control" formControlName="phone" [ngClass]="{'red-border': userForm.controls['phone'].errors && (userForm.controls['phone'].dirty && userForm.controls['phone'].touched)}">
+      <div *ngIf="userForm.controls['phone'].errors && (userForm.controls['phone'].dirty && userForm.controls['phone'].touched)"
+        class="alert alert-danger">
+        <div *ngIf="userForm.controls['phone'].hasError('required')">
+          Please enter a phone no.
+        </div>
+        <div *ngIf="userForm.controls['phone'].hasError('pattern')">
+          Please exactly 10 digits
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
