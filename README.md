@@ -1,4 +1,5 @@
-# Task
+This project has 2 tasks related to REACTIVE FORMS in angular, involves basic concepts of routing for switching between the two components. Form includes all the validations along with the concepts of FormControl, FormGroup, FormArray. Also, the project uses queryParams to read from url and include the value in the text field. Go ahead and explore the rest! 
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
 
